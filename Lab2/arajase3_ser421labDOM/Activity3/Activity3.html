@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="Activity3.js"></script>
+<body>
+    <h1 id="header">Hi There!</h1>
+    <p id="wname">What's your name?</p>
+    <br>
+    <p id="question"></p>
+        <form>
+            <input type="text" id="query">
+            <input type="button" value="Submit" id="eAction" onclick="applyName(document.getElementById('query').value);">
+            <input type="button" value="Clear" id="clear" hidden="hidden" onclick="clearName();">
+            <input type="button" value="Search" id="search" hidden="hidden" onclick="searchName(document.getElementById('query').value);">
+            <p id="timeout"></p>
+        </form>
+    </body>
+</html>
