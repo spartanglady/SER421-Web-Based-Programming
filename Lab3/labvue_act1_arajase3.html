@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<script src="Activity2.js"></script>
+<body>
+<div id="app">
+    <h1 id="header">Answer me these 3 questions:</h1>
+    <label id="lname" for="name">1. What is your name?</label>
+    <br> &nbsp; &nbsp;
+    <input type=text v-model="q1" @input="checkInput">
+    <br>
+    <label id="lquest" for="quest">2. What is your quest?</label>
+    <br> &nbsp; &nbsp;
+    <input v-model="q2" id="quest" @input="checkInput">
+    <br>
+    <label id="lcolor" for="color">{{val}}</label>
+    <br> &nbsp; &nbsp;
+    <input v-model="q3" id="color" @input="checkInput">
+    <br>
+    <p v-if="knight">Knight: AAAAAAAAHHHHHHHHHHH!!!</p>
+    <p v-if="bridgekeeper">Bridgekeeper: Alright, off you go then</p>
+    <br>
+    <button @click="reset">Go Again</button>
+</div>
+
+</body>
+<script src="https://unpkg.com/vue@3"></script>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                q1: "",
+                q2: "",
+                q3: "",
+                knight: false,
+                bridgekeeper: false,
+                val: "3. What is your favorite color?"
+            }
+        },
+        methods: {
+            checkInput() {
+                if (this.q1.includes("idk") || this.q2.includes("idk") || this.q3.includes("idk")) {
+                    this.bridgekeeper = false;
+                    this.knight = true;
+                } else {
+                    this.knight = false;
+                    this.bridgekeeper = this.q1.length > 0 && this.q2.length > 0 && this.q3.length > 0;
+                }
+            },
+            reset() {
+                this.q1 = "";
+                this.q2 = "";
+                this.q3 = "";
+                if (this.val.includes("3. What is your favorite color?")) {
+                    this.val = "3. What is the airspeed velocity of an unladen swallow?";
+                } else {
+                    this.val = "3. What is your favorite color?";
+                }
+            }
+        }
+    }).mount('#app')
+</script>
+</html>

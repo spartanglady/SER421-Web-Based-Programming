@@ -1,0 +1,252 @@
+#1. (5) Find the gtfsId, shortName, longName, mode and stops for BUS routes starting with “48” using the Finland 
+#GraphQL API endpoint at https://api.digitransit.fi/routing/v1/routers/finland/index/graphql
+{
+    routes(name: "48", transportModes: BUS) {
+      gtfsId
+      shortName
+      longName
+      mode
+    }
+}
+
+#2. (10) Find all stops within a 500m radius of the station with name Parola (requires 2 queries), returning the gtfsId, 
+# name, and stops with distance using the Waltti GraphQL API at endpoint 
+# https://api.digitransit.fi/routing/v1/routers/waltti/index/graphql
+
+{
+    stations(name: "parola") {
+      gtfsId
+      name
+      lat
+      lon
+      stops {
+        gtfsId
+        name
+        code
+        platformCode
+      }
+    }
+}
+
+{
+    stopsByRadius(lat:61.049922, lon:24.366497, radius:500) {
+        edges {
+        node {
+            stop {
+            gtfsId
+            name
+            }
+            distance
+        }
+        }
+    }
+}
+
+#Query Results:
+
+
+#1.
+
+
+{
+    "data": {
+      "routes": [
+        {
+          "gtfsId": "tampere:48",
+          "shortName": "48",
+          "longName": "Pohja - Kuhmalahti - Sahalahti - Kangasala",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "MATKA:75314319",
+          "shortName": "480",
+          "longName": "Joensuu  -Ilomantsi",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "MATKA:74070992",
+          "shortName": "48",
+          "longName": "Teknologiakylä - Heikkilänkangas",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "MATKA:74996486",
+          "shortName": "48",
+          "longName": "Klaukkala - Perttula - Nummenpää",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "MATKA:74996473",
+          "shortName": "48",
+          "longName": "Klaukkala - Mäntysalo - Perttula - Nummenpää",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "MATKA:74996590",
+          "shortName": "48",
+          "longName": "Mäntysalo - Uotilan koulu - Nummenpää",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "tampere:48A",
+          "shortName": "48A",
+          "longName": "Pohja - Pakkala - Sahalahti - Kangasala",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "tampere:48C",
+          "shortName": "48C",
+          "longName": "Pohja - Kivisalmi - Pakkala - Sahalahti - Kangasala",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "tampere:48B",
+          "shortName": "48B",
+          "longName": "Pohja - Kivisalmi - Sahalahti - Kangasala",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "MATKA:74996604",
+          "shortName": "48",
+          "longName": "Nummenpää - Perttula",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "MATKA:74996605",
+          "shortName": "48",
+          "longName": "Nummenpää - Perttula - Klaukkala",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "MATKA:74996607",
+          "shortName": "48",
+          "longName": "Nummenpää - Perttula - Mäntysalo",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "MATKA:74996688",
+          "shortName": "48",
+          "longName": "Perttula - Nummenpää",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "MATKA:75421495",
+          "shortName": "48",
+          "longName": "Siilinjärvi-Heinämäki-Kolmisoppi",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "OULU:48",
+          "shortName": "48",
+          "longName": "Teknologiakylä - Heikkilänkangas",
+          "mode": "BUS"
+        },
+        {
+          "gtfsId": "MATKA:73582021",
+          "shortName": "48",
+          "longName": "Elimäki - Raussila - Koskisto - Hämeenkylä - Joensuunkylä",
+          "mode": "BUS"
+        }
+      ]
+    }
+  }
+
+  #2a.
+
+  {
+    "data": {
+      "stations": [
+        {
+          "gtfsId": "TampereVR:PRL",
+          "name": "Parola",
+          "lat": 61.049922,
+          "lon": 24.366497,
+          "stops": [
+            {
+              "gtfsId": "TampereVR:PRL_3",
+              "name": "Parola",
+              "code": null,
+              "platformCode": "3"
+            },
+            {
+              "gtfsId": "TampereVR:PRL_1",
+              "name": "Parola",
+              "code": null,
+              "platformCode": "1"
+            },
+            {
+              "gtfsId": "TampereVR:PRL_0",
+              "name": "Parola",
+              "code": null,
+              "platformCode": null
+            }
+          ]
+        }
+      ]
+    }
+  }
+
+  #2b.
+
+  {
+    "data": {
+      "stopsByRadius": {
+        "edges": [
+          {
+            "node": {
+              "stop": {
+                "gtfsId": "TampereVR:PRL_3",
+                "name": "Parola"
+              },
+              "distance": 293
+            }
+          },
+          {
+            "node": {
+              "stop": {
+                "gtfsId": "TampereVR:PRL_1",
+                "name": "Parola"
+              },
+              "distance": 343
+            }
+          },
+          {
+            "node": {
+              "stop": {
+                "gtfsId": "TampereVR:PRL_0",
+                "name": "Parola"
+              },
+              "distance": 392
+            }
+          },
+          {
+            "node": {
+              "stop": {
+                "gtfsId": "Hameenlinna:137851",
+                "name": "Paloasema I"
+              },
+              "distance": 433
+            }
+          },
+          {
+            "node": {
+              "stop": {
+                "gtfsId": "Hameenlinna:137850",
+                "name": "Paloasema L"
+              },
+              "distance": 441
+            }
+          },
+          {
+            "node": {
+              "stop": {
+                "gtfsId": "Hameenlinna:139484",
+                "name": "Merventie P"
+              },
+              "distance": 482
+            }
+          }
+        ]
+      }
+    }
+  }

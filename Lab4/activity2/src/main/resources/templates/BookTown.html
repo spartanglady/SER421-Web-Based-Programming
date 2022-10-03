@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Lab5 - Activity2</title>
+</head>
+<body>
+<h1>Authors:</h1>
+<h2 th:text="${controllerHint}"></h2>
+<div th:if="${ not#lists.isEmpty(authors)}">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="author : ${authors}">
+            <td th:text="${author.id}"></td>
+            <td th:text="${author.lastName}"></td>
+            <td th:text="${author.firstName}"></td>
+            <td><a th:href="@{'/booktown/delete/' + ${author.id}}">delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<h2 th:text="${statusHint}"></h2>
+
+<form method="post" th:action="@{/booktown/add}" th:object="${author}">
+    <label for="firstName">First Name:</label>
+    <input type="text" name="firstName" id="firstName" th:value="*{firstName}"/>
+    <label for="lastName">Last Name:</label>
+    <input type="text" name="lastName" id="lastName" th:value="*{lastName}"/>
+    <input type="submit" value="Create Author"/>
+</form>
+<br/>
+<a th:href="@{/booktown/list}">Refresh this list</a>
+</body>
+</html>
