@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Mon Oct 03 21:39:32 MST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0183-a14a-bacf-0000021e8110 
+on database directory memory:/Users/aravind/Downloads/activity3/291d004a-0d4b-411c-9dc0-e5a4fca78a1b with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@251a69d7 
+Loaded from file:/Users/aravind/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
+java.vendor=Azul Systems, Inc.
+java.runtime.version=17.0.4.1+1-LTS
+user.dir=/Users/aravind/Downloads/activity3
+os.name=Mac OS X
+os.arch=aarch64
+os.version=13.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
