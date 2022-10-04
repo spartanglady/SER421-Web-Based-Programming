@@ -15,6 +15,9 @@ import java.util.List;
 @Controller
 public class PhoneBookController {
 
+    /**
+     * The below Variable pre-creates a set of phonebooks and acts as a local database.
+     */
     private List<PhoneBook> phoneBookList = new ArrayList<PhoneBook>(){
         {
             add(new PhoneBook(123, "New York", "2018"));
@@ -24,7 +27,12 @@ public class PhoneBookController {
     };
 
 
-
+    /**
+     * Retrieve a specific PhoneEntry based on a phone number
+     * Uses a GET Method with below param
+     * @param phoneNumber
+     * @return PhoneEntry Object
+     */
     @GetMapping("/getPhoneEntry")
     public ResponseEntity<PhoneEntry>  getPhoneEntry (@RequestParam("phoneNumber") String phoneNumber) {
         var phoneBookEntry = phoneBookList.stream().filter(phoneBook -> phoneBook.getAreaCode().toString().equals(phoneNumber.substring(0,2))).findFirst().get();
@@ -32,6 +40,13 @@ public class PhoneBookController {
 
         return ResponseEntity.ok(phoneEntry);
     }
+
+    /**
+     * Retrieve a specific PhoneBook based on a area code
+     * Uses a POST Method with below param
+     * @param PhoneCreate Object
+     * @return String and a valid HTTP CODE explaining if the resource was created or not.
+     */
 
     @PostMapping("/createPhoneEntry")
     public ResponseEntity<String> createPhoneEntry(@RequestBody PhoneCreate phoneCreate) {
@@ -51,6 +66,12 @@ public class PhoneBookController {
 
     }
 
+    /**
+     * Update a specific PhoneEntry based on a phone number
+     * Uses a PUT Method with below param
+     * @param PhoneUpdate Object
+     * @return String and a valid HTTP CODE explaining if the resource was updated or not.
+     */
     @PutMapping("/updatePhoneEntry")
     public ResponseEntity<String> updatePhoneEntry(@RequestBody PhoneUpdate phoneUpdate) {
         var phoneBookEntry = phoneBookList.stream().filter(phoneBook -> phoneBook.getAreaCode().toString().equals(phoneUpdate.getOldPhoneNumber().substring(0,2))).findFirst();
@@ -73,17 +94,34 @@ public class PhoneBookController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Entered Old Phone Book Doesn't exist");
     }
 
+    /**
+     * Get all the PhoneBooks
+     * Uses a GET Method with no params
+     * @return PhoneBook Object List
+     */
     @GetMapping("/getAllPhoneBook")
     public ResponseEntity<List<PhoneBook>> getAllPhoneBooks() {
         return ResponseEntity.ok(phoneBookList);
     }
 
+    /**
+     * Get all the PhoneBook by AreaCode
+     * Uses a GET Method with below param
+     * @param areaCode
+     * @return PhoneBook Object
+     */
     @GetMapping("/getPhoneBookByAreaCode")
     public ResponseEntity<PhoneBook>  getPhoneBook (@RequestParam("areaCode") String areaCode) {
         var phoneBook = phoneBookList.stream().filter(pBook -> pBook.getAreaCode().toString().equals(areaCode)).findFirst().get();
         return ResponseEntity.ok(phoneBook);
     }
 
+    /**
+     * Get Phone ENtry by AreaCode and PhoneNumber
+     * Uses a GET Method with below param
+     * @param areaCode, firstName, lastName
+     * @return A list of PhoneEntry Object
+     */
     @GetMapping("/getPhoneEntryByFirstLastSubString/{areaCode}")
     public ResponseEntity<List<PhoneEntry>>  getPhoneEntryByFirstLastSubString (@PathVariable("areaCode") String areaCode, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         var phoneBook = phoneBookList.stream().filter(pBook -> pBook.getAreaCode().toString().equals(areaCode)).findFirst().get();
@@ -93,6 +131,11 @@ public class PhoneBookController {
         return ResponseEntity.ok(phoneEntryList);
     }
 
+    /**
+     * Delete a specific PhoneEntry based on a phone number
+     * @param phoneNumber
+     * @return String and a valid HTTP CODE explaining if the resource was deleted or not.
+     */
     @DeleteMapping("/deletePhoneEntry")
     public ResponseEntity<PhoneBook> deletePhoneEntry(@RequestParam("phoneNumber") String phoneNumber) {
         var phoneBook = phoneBookList.stream().filter(pBook -> pBook.getAreaCode().toString().equals(phoneNumber.substring(0,2))).findFirst().get();
