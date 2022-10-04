@@ -1,0 +1,3 @@
+Activity1 => labServerSide_Act1_graphql.json
+Activity2 => The BookTown Service can be run as a gradle project with `./gradlew bootRun` . I have added an embedded derby database with the project and it has a bootstrap script that also adds author data during the server startup. Additionally i have used Spring JPA
+Activity3 => I have bootstrapped the PhoneBook to preload with a set of areaCodes as a List Collection. The service again can be started with just a `./gradlew bootRun`
